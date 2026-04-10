@@ -14,3 +14,6 @@ __pycache__/
 # Runtime outputs
 outputs/*
 !outputs/.gitkeep
+
+# Local working notes
+docs/
