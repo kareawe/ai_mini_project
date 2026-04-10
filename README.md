@@ -83,7 +83,7 @@ Final Report
 ## Run
 
 ```bash
-python main.py \
+python app.py \
   --query "HBM4, PIM, CXL 기술 경쟁사 전략 분석" \
   --techs HBM4 PIM CXL
 
