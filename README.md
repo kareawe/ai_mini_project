@@ -97,6 +97,12 @@ graph TD
     Formatting_Node -- "PDF 생성 완료 보고" --> Supervisor
     
     Supervisor -- "최종 생성 확인 후" --> END((END))
+
+    %% 스타일링
+    style Supervisor fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style Draft_Agent fill:#fff3e0,stroke:#e65100
+    style Formatting_Node fill:#f1f8e9,stroke:#33691e
+    style END fill:#eceff1,stroke:#263238
 ```
 
 ---
