@@ -51,6 +51,16 @@ Semiconductor Core Technology Strategy Analysis for HBM4, PIM, and CXL
 | Output     | Markdown → PDF                   |
 
 ---
+## Why `paraphrase-multilingual-mpnet-base-v2`
+
+- 한국어 + 영어를 함께 처리해야 하는 다국어 환경에 적합
+- 문장 의미 기반 유사도 성능이 높아 RAG 검색에 유리
+- paraphrase(의역) 수준에서도 의미를 잘 잡아냄
+- 성능 대비 속도와 안정성이 좋아 실무 적용에 적합
+
+> 다국어 환경에서 의미 기반 검색 성능과 효율성을 동시에 확보하기 위해 선택
+
+---
 
 ## Agents
 
