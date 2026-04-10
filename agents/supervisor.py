@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from agents.types import WorkflowState
+from core.types import WorkflowState
 
 
 def run_supervisor(state: WorkflowState) -> dict:

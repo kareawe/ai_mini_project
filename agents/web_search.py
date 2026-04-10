@@ -12,16 +12,16 @@ from pydantic import BaseModel, Field
 
 from prompts.web_search import WEB_SEARCH_SYSTEM_PROMPT, build_search_prompt
 
-from agents.search_store import (
+from core.search_store import (
     build_accuracy_summary,
     build_freshness_summary,
     format_accuracy_summary,
     format_freshness_summary,
     save_search_documents,
 )
-from agents.types import SearchDocument, WorkflowState
-from agents.utils import fetch_page_date, get_client, infer_source_type
-from agents.vector_store import build_vector_store
+from core.types import SearchDocument, WorkflowState
+from core.utils import fetch_page_date, get_client, infer_source_type
+from core.vector_store import build_vector_store
 
 
 TECH_QUERY_GROUPS = [

@@ -12,7 +12,12 @@ __pycache__/
 .pytest_cache/
 
 # Runtime outputs
+outputs/*
 !outputs/.gitkeep
+
+# Local data
+data/*
+!data/.gitkeep
 
 # Local working notes
 docs/

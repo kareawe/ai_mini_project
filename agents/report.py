@@ -15,9 +15,9 @@ from prompts.report import (
     build_report_prompt,
 )
 
-from agents.types import ConsistencySummary, SearchDocument, WorkflowState
-from agents.utils import get_client, json_dumps
-from agents.vector_store import retrieve_documents
+from core.types import ConsistencySummary, SearchDocument, WorkflowState
+from core.utils import get_client, json_dumps
+from core.vector_store import retrieve_documents
 
 
 class ConsistencyTechnologyAssessment(BaseModel):

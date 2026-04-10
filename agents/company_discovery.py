@@ -9,8 +9,8 @@ from pydantic import BaseModel, Field
 
 from prompts.company_discovery import DISCOVERY_SYSTEM_PROMPT, build_discovery_prompt
 
-from agents.types import WorkflowState
-from agents.utils import dedupe_keep_order, get_client, normalize_company_name
+from core.types import WorkflowState
+from core.utils import dedupe_keep_order, get_client, normalize_company_name
 
 
 DISCOVERY_QUERIES = [

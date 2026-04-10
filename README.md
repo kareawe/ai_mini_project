@@ -29,7 +29,7 @@
 
 평가 데이터:
 
-- [retrieval_eval_queries.json](/Users/minhu/Documents/workplace/ai_mini_project/data/retrieval_eval_queries.json)
+- 로컬 `data/retrieval_eval_queries.json` 기준
 
 metric:
 
