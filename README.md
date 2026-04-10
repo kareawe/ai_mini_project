@@ -1,5 +1,15 @@
 # ai_mini_project
 
+## 핵심 기능 요약
+
+- `Supervisor -> Company Discovery -> Web Search -> Report -> Formatting` 순서로 LangGraph 파이프라인을 실행합니다.
+- 최신 반도체 웹 문서를 수집하고 날짜를 파싱한 뒤, 검색 결과를 JSON으로 저장하고 FAISS 인덱스로 구성합니다.
+- retrieval 기반으로 한국어 기술 전략 보고서를 생성하고, Markdown과 PDF를 함께 출력합니다.
+- 보고서에는 아래 3개 품질 지표를 함께 기록합니다.
+- 최신도: 날짜 확인 가능 문서 비율, 최근 1년 문서 비율, 최신 문서 일자
+- 정확도: 고신뢰 출처 비율
+- 일관성: 동일 근거로 5회 반복 생성한 결론 일관성
+
 ## Workflow
 
 `Supervisor -> Company Discovery -> Web Search -> Report -> Formatting`

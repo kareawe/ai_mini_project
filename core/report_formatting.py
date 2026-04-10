@@ -129,6 +129,12 @@ def build_final_report(
         accuracy_summary,
         consistency_summary,
     )
+    methodology_note = [
+        "## 해석 유의사항",
+        "",
+        "- 직접 근거가 제한된 항목은 특허 출원 패턴, 학회 발표 빈도 변화, 채용 공고 키워드 등 간접 지표를 근거로 추정했으며, 해당 한계를 보고서 본문에 명시합니다.",
+        "",
+    ]
 
     return "\n".join(
         [
@@ -137,6 +143,7 @@ def build_final_report(
             f"- 생성 시각: {generated_at}",
             "",
             *metrics_block,
+            *methodology_note,
             report_body,
             "",
         ]
