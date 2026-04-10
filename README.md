@@ -180,6 +180,16 @@ python app.py \
   재시도 횟수 : {'rag': 0, 'web_search': 1, 'competitor': 0, 'report': 0}
 ```
 
+## Retrieval Performance
+
+| Metric     | Score |
+|------------|-------|
+| Hit Rate@5 | 0.60  |
+| MRR        | 0.60  |
+
+> Top-5 기준 60% 정답 포함, 평균적으로 상위 2순위 내 정답 위치
+
+
 ## Contributors
 
 본 프로젝트는 전 과정에 걸쳐 팀원 간 논의를 기반으로 공동 설계 및 구현되었으며,  
