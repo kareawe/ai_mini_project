@@ -1,0 +1,9 @@
+{
+  "accuracy_score": 1.0,
+  "recency_score": 0.8947368421052632,
+  "consistency_score": 0.85,
+  "bias_check_passed": true,
+  "cross_validation_passed": true,
+  "overall_passed": true,
+  "feedback": "모든 기준 통과"
+}

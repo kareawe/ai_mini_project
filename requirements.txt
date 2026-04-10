@@ -1,0 +1,27 @@
+# ── LangGraph / LangChain ──────────────────────
+langgraph>=0.2.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+langchain-community>=0.2.0
+
+# ── 임베딩 (HuggingFace 로컬) ──────────────────
+sentence-transformers>=3.0.0   # paraphrase-multilingual-mpnet-base-v2
+torch>=2.0.0                   # sentence-transformers 백엔드
+
+# ── 벡터 DB ────────────────────────────────────
+chromadb>=0.5.0                # 영속 로컬 벡터 DB
+
+# ── 웹 검색 ────────────────────────────────────
+tavily-python>=0.3.0           # Tavily API (TAVILY_API_KEY 환경변수 필요)
+
+# ── PDF 처리 ───────────────────────────────────
+pymupdf>=1.24.0                # PDF 파싱 (fitz)
+
+# ── PDF 생성 ───────────────────────────────────
+weasyprint>=62.0               # MD → PDF 변환
+markdown2>=2.4.0               # Markdown → HTML
+
+# ── 유틸리티 ───────────────────────────────────
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+tqdm>=4.66.0

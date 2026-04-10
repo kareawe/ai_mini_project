@@ -1,0 +1,22 @@
+[
+  {
+    "question": "HBM4의 주요 기술적 과제는 무엇인가?",
+    "gold_source": "2024032107171771K_02_03.pdf"
+  },
+  {
+    "question": "PIM의 구조와 활용 방향은 무엇인가?",
+    "gold_source": "2025_삼성hotchips.pdf"
+  },
+  {
+    "question": "CXL의 기술 동향과 발전 전망은 무엇인가?",
+    "gold_source": "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf"
+  },
+  {
+    "question": "SK하이닉스의 HBM 관련 기술 설명은 무엇인가?",
+    "gold_source": "Tutorial1-4_손호영수수석님_SK하이닉스.pdf"
+  },
+  {
+    "question": "HBM4 시장 동향은 어떠한가?",
+    "gold_source": "hbm4_시장동향.pdf"
+  }
+]
