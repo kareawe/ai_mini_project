@@ -12,7 +12,13 @@ from pydantic import BaseModel, Field
 
 from prompts.web_search import WEB_SEARCH_SYSTEM_PROMPT, build_search_prompt
 
-from agents.search_store import calculate_latest_doc_ratio, save_search_documents
+from agents.search_store import (
+    build_accuracy_summary,
+    build_freshness_summary,
+    format_accuracy_summary,
+    format_freshness_summary,
+    save_search_documents,
+)
 from agents.types import SearchDocument, WorkflowState
 from agents.utils import fetch_page_date, get_client, infer_source_type
 from agents.vector_store import build_vector_store
@@ -295,12 +301,16 @@ def run_web_search(
     vector_store = build_vector_store(deduped_documents, embedding_model=embedding_model)
     # Freshness is checked after the full search pass so the supervisor can decide
     # whether another search round is worth paying for.
-    latest_doc_ratio = calculate_latest_doc_ratio(deduped_documents)
+    freshness_summary = build_freshness_summary(deduped_documents)
+    accuracy_summary = build_accuracy_summary(deduped_documents)
+    latest_doc_ratio = freshness_summary["recent_365d_ratio"]
     freshness_check_passed = latest_doc_ratio >= state.get("latest_doc_ratio_threshold", 0.3)
     search_documents_path = state.get("search_documents_path", "outputs/search_documents.json")
     output_path = Path(search_documents_path)
     save_search_documents(output_path, deduped_documents)
     print(f"Saved search documents: {output_path} ({len(deduped_documents)} items)", flush=True)
+    print(f"[web_search] {format_freshness_summary(freshness_summary)}", flush=True)
+    print(f"[web_search] {format_accuracy_summary(accuracy_summary)}", flush=True)
     print(
         f"[web_search] freshness_check_passed={freshness_check_passed} "
         f"latest_doc_ratio={latest_doc_ratio:.2f}",
@@ -312,5 +322,7 @@ def run_web_search(
         "search_documents_path": str(output_path),
         "vector_store": vector_store,
         "latest_doc_ratio": latest_doc_ratio,
+        "freshness_summary": freshness_summary,
+        "accuracy_summary": accuracy_summary,
         "freshness_check_passed": freshness_check_passed,
     }

@@ -6,8 +6,8 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from agents.types import SearchDocument
-from agents.utils import is_recent_date, normalize_company_name
+from agents.types import AccuracySummary, FreshnessSummary, SearchDocument
+from agents.utils import is_recent_date, normalize_company_name, parse_date_value
 from agents.vector_store import build_vector_store
 
 
@@ -48,6 +48,64 @@ def calculate_latest_doc_ratio(documents: list[SearchDocument]) -> float:
     return recent_count / len(documents)
 
 
+def build_freshness_summary(documents: list[SearchDocument]) -> FreshnessSummary:
+    total_documents = len(documents)
+    parsed_dates = [
+        parse_date_value(document.get("date", ""))
+        for document in documents
+    ]
+    valid_dates = [parsed_date for parsed_date in parsed_dates if parsed_date is not None]
+    dated_documents = len(valid_dates)
+
+    sorted_dates = sorted(valid_dates)
+    most_recent_date = sorted_dates[-1].isoformat() if sorted_dates else ""
+    recent_365d_ratio = (
+        sum(1 for document in documents if is_recent_date(document.get("date", ""), days=365)) / total_documents
+        if total_documents
+        else 0.0
+    )
+
+    return {
+        "dated_ratio": (dated_documents / total_documents) if total_documents else 0.0,
+        "recent_365d_ratio": recent_365d_ratio,
+        "most_recent_date": most_recent_date,
+    }
+
+
+def format_freshness_summary(summary: FreshnessSummary) -> str:
+    dated_ratio = summary.get("dated_ratio", 0.0)
+    recent_365d_ratio = summary.get("recent_365d_ratio", 0.0)
+    most_recent_date = summary.get("most_recent_date", "") or "unknown"
+    return (
+        "freshness: "
+        f"dated_ratio={dated_ratio:.0%} | "
+        f"recent_365d_ratio={recent_365d_ratio:.0%} | "
+        f"most_recent_date={most_recent_date}"
+    )
+
+
+def build_accuracy_summary(documents: list[SearchDocument]) -> AccuracySummary:
+    total_documents = len(documents)
+    if total_documents == 0:
+        return {
+            "high_trust_source_ratio": 0.0,
+        }
+
+    high_trust_types = {"official", "standard", "paper", "patent"}
+    high_trust_count = sum(
+        1 for document in documents if document.get("source_type", "") in high_trust_types
+    )
+
+    return {
+        "high_trust_source_ratio": high_trust_count / total_documents,
+    }
+
+
+def format_accuracy_summary(summary: AccuracySummary) -> str:
+    high_trust_source_ratio = summary.get("high_trust_source_ratio", 0.0)
+    return f"accuracy: high_trust_source_ratio={high_trust_source_ratio:.0%}"
+
+
 def load_saved_search_context(
     *,
     input_path: Path,
@@ -62,7 +120,9 @@ def load_saved_search_context(
         our_company=our_company,
         max_companies=max_companies,
     )
-    latest_doc_ratio = calculate_latest_doc_ratio(documents)
+    freshness_summary = build_freshness_summary(documents)
+    accuracy_summary = build_accuracy_summary(documents)
+    latest_doc_ratio = freshness_summary["recent_365d_ratio"]
     vector_store = build_vector_store(documents, embedding_model=embedding_model)
 
     return {
@@ -71,5 +131,7 @@ def load_saved_search_context(
         "search_documents_path": str(input_path),
         "vector_store": vector_store,
         "latest_doc_ratio": latest_doc_ratio,
+        "freshness_summary": freshness_summary,
+        "accuracy_summary": accuracy_summary,
         "freshness_check_passed": latest_doc_ratio >= latest_doc_ratio_threshold,
     }

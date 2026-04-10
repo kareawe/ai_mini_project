@@ -1,0 +1,6 @@
+openai
+langgraph
+requests
+faiss-cpu
+sentence-transformers
+reportlab

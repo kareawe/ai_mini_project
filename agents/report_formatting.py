@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 from datetime import datetime, timedelta, timezone
 
+from agents.types import AccuracySummary, ConsistencySummary, FreshnessSummary
+
 
 def strip_wrapping_code_fence(text: str) -> str:
     stripped = text.strip()
@@ -58,11 +60,75 @@ def remove_summary_tables(text: str) -> str:
     return "\n".join(cleaned_summary + remaining_lines).strip()
 
 
-def build_final_report(draft_report: str) -> str:
+def ensure_summary_heading(text: str) -> str:
+    stripped = text.lstrip()
+    if stripped.startswith("# 요약"):
+        return text.strip()
+    if stripped.startswith("SUMMARY"):
+        remainder = stripped[len("SUMMARY") :].lstrip()
+        return f"# 요약\n\n{remainder}".strip()
+    return f"# 요약\n\n{text.strip()}"
+
+
+def _build_metrics_block(
+    freshness_summary: FreshnessSummary | None,
+    accuracy_summary: AccuracySummary | None,
+    consistency_summary: ConsistencySummary | None,
+) -> list[str]:
+    if not freshness_summary and not accuracy_summary and not consistency_summary:
+        return []
+
+    lines = ["## 메트릭", ""]
+
+    if freshness_summary:
+        dated_ratio = freshness_summary.get("dated_ratio", 0.0)
+        recent_365d_ratio = freshness_summary.get("recent_365d_ratio", 0.0)
+        most_recent_date = freshness_summary.get("most_recent_date", "") or "unknown"
+        lines.extend(
+            [
+                f"- 날짜 확인 가능 문서 비율: {dated_ratio:.0%}",
+                f"- 최근 1년 문서 비율: {recent_365d_ratio:.0%}",
+                f"- 최신 문서 일자: {most_recent_date}",
+            ]
+        )
+
+    if accuracy_summary:
+        high_trust_source_ratio = accuracy_summary.get("high_trust_source_ratio", 0.0)
+        lines.append(f"- 고신뢰 출처 비율: {high_trust_source_ratio:.0%}")
+
+    if consistency_summary:
+        run_count = consistency_summary.get("run_count", 0)
+        consistency_ratio = consistency_summary.get("overall_consistency_ratio", 0.0)
+        lines.extend(
+            [
+                f"- 결론 일관성: {consistency_ratio:.0%} ({run_count}회 반복 평가)",
+            ]
+        )
+        if consistency_summary.get("warning_required", False):
+            lines.append(
+                "- 주의: 동일 근거 기반 반복 평가에서 일관성이 낮아 최종 판단은 신중한 해석이 필요함."
+            )
+
+    lines.append("")
+    return lines
+
+
+def build_final_report(
+    draft_report: str,
+    freshness_summary: FreshnessSummary | None = None,
+    accuracy_summary: AccuracySummary | None = None,
+    consistency_summary: ConsistencySummary | None = None,
+) -> str:
     korea_time = datetime.now(timezone(timedelta(hours=9)))
     generated_at = korea_time.strftime("%Y-%m-%d %H:%M KST")
     report_body = strip_wrapping_code_fence(draft_report)
     report_body = remove_summary_tables(report_body)
+    report_body = ensure_summary_heading(report_body)
+    metrics_block = _build_metrics_block(
+        freshness_summary,
+        accuracy_summary,
+        consistency_summary,
+    )
 
     return "\n".join(
         [
@@ -70,6 +136,7 @@ def build_final_report(draft_report: str) -> str:
             "",
             f"- 생성 시각: {generated_at}",
             "",
+            *metrics_block,
             report_body,
             "",
         ]

@@ -8,9 +8,11 @@ from pathlib import Path
 from langgraph.graph import END, StateGraph
 
 from agents.company_discovery import run_company_discovery
+from agents.pdf_render import render_report_pdf
+from agents.retrieval_eval import evaluate_retrieval
 from agents.report_formatting import build_final_report
 from agents.report import run_report
-from agents.search_store import load_saved_search_context
+from agents.search_store import format_accuracy_summary, format_freshness_summary, load_saved_search_context
 from agents.supervisor import route_next_action, run_supervisor
 from agents.types import WorkflowState
 from agents.utils import get_api_key
@@ -21,12 +23,8 @@ DEFAULT_TECHNOLOGIES = ["HBM4", "PIM", "CXL"]
 DEFAULT_OUR_COMPANY = "SK hynix"
 DEFAULT_MODEL = "gpt-4.1-mini"
 DEFAULT_EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-STEP_ORDER = [
-    ("company_discovery", "Company Discovery"),
-    ("web_search", "Web Search"),
-    ("report", "Report"),
-    ("formatting", "Formatting"),
-]
+DEFAULT_CONSISTENCY_RUNS = 5
+DEFAULT_RETRIEVAL_EVAL_CASES = "data/retrieval_eval_queries.json"
 
 
 def _mark_completed(result: dict, step_key: str) -> dict:
@@ -34,32 +32,10 @@ def _mark_completed(result: dict, step_key: str) -> dict:
     return result
 
 
-def print_workflow_status(state: WorkflowState, current_step: str) -> None:
-    done_flags = {
-        "company_discovery": state.get("company_discovery_done", False),
-        "web_search": state.get("web_search_done", False),
-        "report": state.get("report_done", False),
-        "formatting": state.get("formatting_done", False),
-    }
-
-    lines = ["", "Workflow Status"]
-    for step_key, label in STEP_ORDER:
-        if done_flags[step_key]:
-            marker = "[x]"
-        elif step_key == current_step:
-            marker = "[>]"
-        else:
-            marker = "[ ]"
-        lines.append(f"{marker} {label}")
-    print("\n".join(lines), flush=True)
-    print(f"Running agent: {current_step}", flush=True)
-
-
 def company_discovery_node(state: WorkflowState) -> dict:
     if state.get("report_only"):
         print("Skipping node: company_discovery (report-only mode)", flush=True)
         return {"company_discovery_done": True}
-    print_workflow_status(state, "company_discovery")
     result = run_company_discovery(
         state,
         model=state.get("model", DEFAULT_MODEL),
@@ -72,7 +48,6 @@ def company_discovery_node(state: WorkflowState) -> dict:
 
 def web_search_node(state: WorkflowState) -> dict:
     if state.get("report_only"):
-        print_workflow_status(state, "web_search")
         input_path = Path(state["search_documents_input_path"])
         result = load_saved_search_context(
             input_path=input_path,
@@ -87,8 +62,27 @@ def web_search_node(state: WorkflowState) -> dict:
             flush=True,
         )
         print(f"Recovered companies from saved search data: {result.get('company_names', [])}", flush=True)
+        if result.get("freshness_summary"):
+            print(f"[web_search] {format_freshness_summary(result['freshness_summary'])}", flush=True)
+        if result.get("accuracy_summary"):
+            print(f"[web_search] {format_accuracy_summary(result['accuracy_summary'])}", flush=True)
+        eval_cases_path = Path(state.get("retrieval_eval_cases_path", DEFAULT_RETRIEVAL_EVAL_CASES))
+        if eval_cases_path.exists():
+            retrieval_metrics = evaluate_retrieval(
+                store=result.get("vector_store"),
+                eval_cases_path=eval_cases_path,
+                embedding_model=state.get("embedding_model", DEFAULT_EMBEDDING_MODEL),
+            )
+            result["retrieval_metrics"] = retrieval_metrics
+            print(
+                "[web_search] retrieval_eval "
+                f"Hit@1={retrieval_metrics['hit_rate_at_1']:.2f} "
+                f"Hit@3={retrieval_metrics['hit_rate_at_3']:.2f} "
+                f"Hit@5={retrieval_metrics['hit_rate_at_5']:.2f} "
+                f"MRR={retrieval_metrics['mrr']:.2f}",
+                flush=True,
+            )
         return _mark_completed(result, "web_search")
-    print_workflow_status(state, "web_search")
     result = run_web_search(
         state,
         model=state.get("model", DEFAULT_MODEL),
@@ -97,6 +91,22 @@ def web_search_node(state: WorkflowState) -> dict:
         company_min_docs=state.get("company_min_docs", 3),
         max_docs_per_query=state.get("max_docs_per_query", 2),
     )
+    eval_cases_path = Path(state.get("retrieval_eval_cases_path", DEFAULT_RETRIEVAL_EVAL_CASES))
+    if eval_cases_path.exists():
+        retrieval_metrics = evaluate_retrieval(
+            store=result.get("vector_store"),
+            eval_cases_path=eval_cases_path,
+            embedding_model=state.get("embedding_model", DEFAULT_EMBEDDING_MODEL),
+        )
+        result["retrieval_metrics"] = retrieval_metrics
+        print(
+            "[web_search] retrieval_eval "
+            f"Hit@1={retrieval_metrics['hit_rate_at_1']:.2f} "
+            f"Hit@3={retrieval_metrics['hit_rate_at_3']:.2f} "
+            f"Hit@5={retrieval_metrics['hit_rate_at_5']:.2f} "
+            f"MRR={retrieval_metrics['mrr']:.2f}",
+            flush=True,
+        )
     _mark_completed(result, "web_search")
     print(
         "Completed node: web_search "
@@ -108,7 +118,6 @@ def web_search_node(state: WorkflowState) -> dict:
 
 
 def report_node(state: WorkflowState) -> dict:
-    print_workflow_status(state, "report")
     result = run_report(
         state,
         model=state.get("report_model", state.get("model", DEFAULT_MODEL)),
@@ -125,14 +134,31 @@ def _write_final_report(output_path: Path, report_text: str) -> None:
 
 
 def formatting_node(state: WorkflowState) -> dict:
-    print_workflow_status(state, "formatting")
-    final_report = build_final_report(state.get("draft_report", ""))
+    final_report = build_final_report(
+        state.get("draft_report", ""),
+        freshness_summary=state.get("freshness_summary"),
+        accuracy_summary=state.get("accuracy_summary"),
+        consistency_summary=state.get("consistency_summary"),
+    )
 
-    output_path = Path(state["output_path"])
-    _write_final_report(output_path, final_report)
+    markdown_output_path = Path(state["output_path"])
+    _write_final_report(markdown_output_path, final_report)
 
-    print(f"Completed node: formatting ({output_path})", flush=True)
-    return {"final_report": final_report, "formatting_done": True}
+    pdf_output_path = Path(
+        state.get("pdf_output_path")
+        or markdown_output_path.with_suffix(".pdf")
+    )
+    rendered_pdf_path = render_report_pdf(final_report, pdf_output_path)
+
+    print(
+        f"Completed node: formatting ({markdown_output_path}, {rendered_pdf_path})",
+        flush=True,
+    )
+    return {
+        "final_report": final_report,
+        "pdf_output_path": rendered_pdf_path,
+        "formatting_done": True,
+    }
 
 
 def build_graph():
@@ -180,6 +206,11 @@ def parse_args() -> argparse.Namespace:
         "--output",
         default="outputs/strategy_report.md",
         help="Output markdown path.",
+    )
+    parser.add_argument(
+        "--pdf-output",
+        default="",
+        help="Optional PDF path rendered after markdown formatting. Defaults to the markdown output path with .pdf suffix.",
     )
     parser.add_argument(
         "--report-only",
@@ -247,6 +278,17 @@ def parse_args() -> argparse.Namespace:
         default=0.3,
         help="Minimum ratio of recent documents required before report generation.",
     )
+    parser.add_argument(
+        "--consistency-runs",
+        type=int,
+        default=DEFAULT_CONSISTENCY_RUNS,
+        help="Number of repeated report-judgment runs used for consistency evaluation.",
+    )
+    parser.add_argument(
+        "--retrieval-eval-cases",
+        default=DEFAULT_RETRIEVAL_EVAL_CASES,
+        help="Retrieval evaluation dataset JSON path.",
+    )
     return parser.parse_args()
 
 
@@ -271,6 +313,7 @@ def main() -> None:
         "our_company": DEFAULT_OUR_COMPANY,
         "target_technologies": args.technologies,
         "output_path": args.output,
+        "pdf_output_path": args.pdf_output,
         "search_documents_path": args.search_documents_output,
         "search_documents_input_path": args.search_documents_input,
         "report_only": args.report_only,
@@ -283,6 +326,8 @@ def main() -> None:
         "max_docs_per_query": args.max_docs_per_query,
         "max_web_search_retries": args.max_web_search_retries,
         "latest_doc_ratio_threshold": args.latest_doc_ratio_threshold,
+        "consistency_runs": args.consistency_runs,
+        "retrieval_eval_cases_path": args.retrieval_eval_cases,
         "web_search_retry_count": 0,
         "latest_doc_ratio": 0.0,
         "freshness_check_passed": False,
@@ -298,6 +343,7 @@ def main() -> None:
     print("Graph invocation completed", flush=True)
 
     print(f"Report written to {args.output}")
+    print(f"PDF written to {final_state.get('pdf_output_path', args.pdf_output)}")
     print(f"Discovered companies: {', '.join(final_state.get('company_names', []))}")
 
 

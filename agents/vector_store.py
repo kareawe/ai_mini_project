@@ -29,7 +29,12 @@ def _get_embedding_model(model_name: str):
 
     model = _EMBEDDING_MODELS.get(model_name)
     if model is None:
-        model = SentenceTransformer(model_name)
+        # Reuse the locally cached model first so evaluation and report-only runs
+        # can work without network access.
+        try:
+            model = SentenceTransformer(model_name, local_files_only=True)
+        except Exception:
+            model = SentenceTransformer(model_name)
         _EMBEDDING_MODELS[model_name] = model
     return model
 
