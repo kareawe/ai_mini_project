@@ -14,12 +14,13 @@
 
 - 검색 엔진: OpenAI Responses API `web_search_preview`
 - 임베딩 모델: `sentence-transformers/all-MiniLM-L6-v2`
-- Retrieval 방식: `Dense retrieval + FAISS + recency bonus`
+- 최종 선택: `Dense retrieval`
+- 구현: `FAISS IndexFlatIP + recency bonus`
 
 후보:
 
 - 임베딩: `all-MiniLM-L6-v2`, `bge-small-en-v1.5`, `bge-base-en-v1.5`, `e5-base-v2`
-- Retrieval: `BM25`, `Dense`, `Hybrid(BM25 + Dense)`, `Dense + reranker`
+- Retrieval 계열: `BM25`, `Dense`, `Hybrid(BM25 + Dense)`, `Dense + reranker`
 
 선정 기준:
 
