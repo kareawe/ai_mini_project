@@ -1,0 +1,112 @@
+{
+  "num_questions": 5,
+  "hit_rate@5": 0.6,
+  "mrr": 0.6,
+  "details": [
+    {
+      "question": "HBM4의 주요 기술적 과제는 무엇인가?",
+      "gold_source": "2024032107171771K_02_03.pdf",
+      "normalized_gold_source": "2024032107171771K_02_03.pdf",
+      "retrieved_sources": [
+        "hbm4_시장동향.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "hbm4_시장동향.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "hbm4_시장동향.pdf"
+      ],
+      "normalized_retrieved_sources": [
+        "hbm4_시장동향.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "hbm4_시장동향.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "hbm4_시장동향.pdf"
+      ],
+      "rank": 0,
+      "hit": false
+    },
+    {
+      "question": "PIM의 구조와 활용 방향은 무엇인가?",
+      "gold_source": "2025_삼성hotchips.pdf",
+      "normalized_gold_source": "2025_삼성hotchips.pdf",
+      "retrieved_sources": [
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf"
+      ],
+      "normalized_retrieved_sources": [
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf",
+        "2025_삼성hotchips.pdf"
+      ],
+      "rank": 1,
+      "hit": true
+    },
+    {
+      "question": "CXL의 기술 동향과 발전 전망은 무엇인가?",
+      "gold_source": "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+      "normalized_gold_source": "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+      "retrieved_sources": [
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "2025_삼성hotchips.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf"
+      ],
+      "normalized_retrieved_sources": [
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "2025_삼성hotchips.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf",
+        "국가반도체연구정책센터 동향 보고서 2024-02 CXL 기술 동향 및 발전 전망.pdf"
+      ],
+      "rank": 1,
+      "hit": true
+    },
+    {
+      "question": "SK하이닉스의 HBM 관련 기술 설명은 무엇인가?",
+      "gold_source": "Tutorial1-4_손호영수수석님_SK하이닉스.pdf",
+      "normalized_gold_source": "Tutorial1-4_손호영수수석님_SK하이닉스.pdf",
+      "retrieved_sources": [
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf"
+      ],
+      "normalized_retrieved_sources": [
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf",
+        "Tutorial1-4_손호영수석님_SK하이닉스.pdf"
+      ],
+      "rank": 0,
+      "hit": false
+    },
+    {
+      "question": "HBM4 시장 동향은 어떠한가?",
+      "gold_source": "hbm4_시장동향.pdf",
+      "normalized_gold_source": "hbm4_시장동향.pdf",
+      "retrieved_sources": [
+        "hbm4_시장동향.pdf",
+        "2024032107171771K_02_03.pdf",
+        "hbm4_시장동향.pdf",
+        "hbm4_시장동향.pdf",
+        "2024032107171771K_02_03.pdf"
+      ],
+      "normalized_retrieved_sources": [
+        "hbm4_시장동향.pdf",
+        "2024032107171771K_02_03.pdf",
+        "hbm4_시장동향.pdf",
+        "hbm4_시장동향.pdf",
+        "2024032107171771K_02_03.pdf"
+      ],
+      "rank": 1,
+      "hit": true
+    }
+  ]
+}

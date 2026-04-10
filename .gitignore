@@ -1,0 +1,19 @@
+# env 파일
+.env
+.env.*
+
+# node
+node_modules/
+
+# build 결과물
+dist/
+build/
+
+# 로그
+*.log
+
+# OS 파일
+.DS_Store
+
+# IDE
+.vscode/
