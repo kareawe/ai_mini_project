@@ -7,22 +7,21 @@
 데이터 수집부터 보고서 생성까지 전 과정을 자동화한 End-to-End 분석 모델이다.
 
 ---
-
 ## Architecture
-User Query
-↓
-Supervisor
-├── RAG Agent (문서 기반 정보 수집)
-├── Web Search Agent (최신 정보 수집)
-├── Competitor Agent (경쟁사 식별)
-↓
-Draft Agent (보고서 생성)
-↓
-Formatting Node (PDF 변환)
-↓
-Final Report
 
----
+```text
+User Query
+   ↓
+Supervisor
+   ├── RAG Agent (문서 기반 정보 수집)
+   ├── Web Search Agent (최신 정보 수집)
+   ├── Competitor Agent (경쟁사 식별)
+   ↓
+Draft Agent (보고서 생성)
+   ↓
+Formatting Node (PDF 변환)
+   ↓
+Final Report
 
 ## Core Components
 
