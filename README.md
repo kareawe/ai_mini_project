@@ -42,7 +42,7 @@ Semiconductor Core Technology Strategy Analysis for HBM4, PIM, and CXL
 
 | Category   | Details                          |
 |------------|----------------------------------|
-| Framework  | LangGraph, LangChain, Python     |
+| Framework  | LangGraph, LangSmith Python     |
 | LLM        | GPT-4o-mini via OpenAI API       |
 | Vector DB  | ChromaDB                         |
 | Retrieval  | Chroma 기반 검색                 |
