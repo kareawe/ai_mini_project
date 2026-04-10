@@ -39,6 +39,8 @@
 
 | Vector DB | FAISS (로컬), Milvus / Weaviate (자체 또는 매니지드) - 임베딩 검색용으로 사용 가능; 기본 구현은 파일/FAISS 기반 RAG이나 환경에 따라 외부 벡터DB를 연결하여 확장하세요. |
 
+Retrieval 관련 수치화 추가 필요
+
 ---
 
 ## Agents
@@ -81,6 +83,4 @@ RAG → Web Search → Competitor List-up → Draft Generation → Formatting
 
 ## Contributors
 
-- 박하정 : Agent 설계, Prompt Engineering, 보고서 생성 로직 구현
-- 윤민후 : 데이터 수집 및 전처리, Retrieval 및 분석 로직 구현
-- 김민재 : Agent 실행 환경 구성 및 데이터 처리 지원
+
