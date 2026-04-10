@@ -22,7 +22,7 @@ Draft Agent (보고서 생성)
 Formatting Node (PDF 변환)
    ↓
 Final Report
-
+```
 ## Core Components
 
 ### Supervisor
