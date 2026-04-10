@@ -4,7 +4,7 @@
 
 `Supervisor -> Company Discovery -> Web Search -> Report -> Formatting`
 
-- `Supervisor`: 단계 실행 순서와 재시도 제어
+- `Supervisor`: 단계 실행 순서와 재 시도 제어
 - `Company Discovery`: 주요 경쟁사/협력사 탐색
 - `Web Search`: 문서 수집, 날짜 파싱, JSON 저장, FAISS 인덱싱
 - `Report`: retrieval 기반 보고서 작성, 결론 일관성 평가
@@ -28,11 +28,11 @@
 - 로컬 실행 속도와 메모리 사용량
 - 구현 복잡도와 유지보수 단순성
 
-평가 데이터:
 
-- 로컬 `data/retrieval_eval_queries.json` 기준
 
 metric:
+웹검색 데이터를 저장하여 임의의 QA 셋을 만들어서 평가진행
+`data/retrieval_eval_queries.json`
 
 - Hit Rate@1: 0.50
 - Hit Rate@3: 0.70
