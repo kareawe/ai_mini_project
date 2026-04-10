@@ -1,0 +1,209 @@
+{
+  "agent_name": "RAGAgent",
+  "status": "success",
+  "retry_count": 1,
+  "validation_passed": true,
+  "warnings": [],
+  "raw_items": [
+    {
+      "title": "cxl_01_introduction_to_compute_express_link.pdf | p.4",
+      "url": "",
+      "source_type": "rag_pdf",
+      "published_date": null,
+      "company_names": [],
+      "technology_names": [],
+      "stance": "neutral",
+      "snippet": "290:4 Debendra Das Sharma et al. Table 1. Overview of CXL Specification Generations, Speeds, and Use Cases Generation Year Scope Speed Use case CXL 1.0 & CXL 1.1 2019 Single machine 32 GT/s Accelerators (Challenge 1) Bandwidth and capacity expansion (Challenge 2) CXL 2.0 2020 2–16 machines (single switch) 32 GT/s Small-scale resource pooling (Challenge 3) CXL 3.0 2022 100s machines (multiple switches) 64 GT/s Large-scale resource pooling and sharing (Challenges 3 and 4) This also standardizes a ",
+      "content": "290:4 Debendra Das Sharma et al. Table 1. Overview of CXL Specification Generations, Speeds, and Use Cases Generation Year Scope Speed Use case CXL 1.0 & CXL 1.1 2019 Single machine 32 GT/s Accelerators (Challenge 1) Bandwidth and capacity expansion (Challenge 2) CXL 2.0 2020 2–16 machines (single switch) 32 GT/s Small-scale resource pooling (Challenge 3) CXL 3.0 2022 100s machines (multiple switches) 64 GT/s Large-scale resource pooling and sharing (Challenges 3 and 4) This also standardizes a coherent interface to facilitate the broad adoption of PIM systems and programming models. CPUs can also cache device memory, which also addresses Challenge 4 (fine- grained distributed data sharing) for heterogeneous computing. Additionally, memory attached to a CXL device can be mapped to the system cacheable memory space. This facilitates heteroge- neous processing and helps with memory bandwidth and capacity expansion challenges (Chal- lenge 2). CXL 1.0 also continues support for PCIe’s non-coherent producer-consumer semantics [ 1 , 2 , 8 ]. CXL 2.0 additionally addresses Challenge 3 (resource stranding) by enabling resource pooling across multiple hosts. We use host to refer to a single-socket or multi-socket system under the control of a single operating system or hypervisor. Pooling overcomes resource stranding and fragmentation by reassigning resources (e.g., memory) to different hosts over time without having to reboot these hosts. The CXL protocol enables pooling by introducing CXL switches that build a small network of hosts and memory devices. CXL 3.0 addresses Challenge 3 on a larger scale with multiple levels of CXL switching. This enables building dynamically composable systems at the rack or even the pod level. Furthermore, CXL 3.0 addresses Challenge 4 (distributed data sharing) by enabling fine-grained memory sharing across host boundaries. CXL requires CPU and device support. The widespread adoption of CXL into commercial prod- ucts by virtually all silicon",
+      "relevance_score": 0.9,
+      "confidence_score": 0.9,
+      "relationship_type": null,
+      "metadata": {
+        "doc_name": "cxl_01_introduction_to_compute_express_link.pdf",
+        "page": 4,
+        "chunk_id": "cxl_01_introduction_to_compute_express_link.pdf_4"
+      }
+    },
+    {
+      "title": "pim_01_modern_primer_on_processing_in_memory.pdf | p.33",
+      "url": "",
+      "source_type": "rag_pdf",
+      "published_date": null,
+      "company_names": [],
+      "technology_names": [],
+      "stance": "neutral",
+      "snippet": "ial SIMD exe- cution). Thus, we believe that future solutions can likely map and schedule different PUM operations across dif- ferent technology-specific PUM architectures in a col- laborative fashion, minimizing overall data movement across different types of memories used for different pur- poses (e.g., caches, main memory, storage) and thereby significantly improving performance, energy efficiency, and system scalability. 7. Processing-Near-Memory (PNM) Processing-near-memory (PNM) involves a",
+      "content": "ial SIMD exe- cution). Thus, we believe that future solutions can likely map and schedule different PUM operations across dif- ferent technology-specific PUM architectures in a col- laborative fashion, minimizing overall data movement across different types of memories used for different pur- poses (e.g., caches, main memory, storage) and thereby significantly improving performance, energy efficiency, and system scalability. 7. Processing-Near-Memory (PNM) Processing-near-memory (PNM) involves adding or integrating PIM logic (e.g., accelerators, simple pro- cessing cores, reconfigurable logic) close to or inside the memory (e.g., [ 8–10, 16, 89–92, 100, 134–150, 152–157, 168–170, 172–174, 180–187, 263, 264, 267– 269, 273, 280–282, 290–348, 403, 735, 844, 971, 990– 1017]). Many of these works place PIM logic inside the logic layer of 3D-stacked memories [ 355–361, 1018]. This PIM processing logic, which we also refer to as PIM cores or PIM engines, interchangeably, can execute portions of applications (from individual instructions to functions) or entire threads and applications, depending on the design of the architecture. Such PIM engines have high-bandwidth and low-latency access to the memory stacks that are on top of them, since the logic layer and the memory layers are connected via high-bandwidth ver- tical connections [355–361, 1018], e.g., through-silicon vias (as described in Section 5.1). In this section, we discuss several examples of how systems can make use of relatively simple PIM engines 3Assuming that a DRAM row is 8 KB, and the DRAM module has 16 DRAM banks, each of which with 64 DRAM subarrays. 33",
+      "relevance_score": 0.9,
+      "confidence_score": 0.9,
+      "relationship_type": null,
+      "metadata": {
+        "doc_name": "pim_01_modern_primer_on_processing_in_memory.pdf",
+        "page": 33,
+        "chunk_id": "pim_01_modern_primer_on_processing_in_memory.pdf_33"
+      }
+    },
+    {
+      "title": "cxl_03_case_against_cxl_memory_pooling.pdf | p.1",
+      "url": "",
+      "source_type": "rag_pdf",
+      "published_date": null,
+      "company_names": [],
+      "technology_names": [],
+      "stance": "neutral",
+      "snippet": "A Case Against CXL Memory Pooling Philip Levis Google plevis@google.com Kun Lin Google linkun@google.com Amy Tai Google amytai@google.com Abstract Compute Express Link (CXL) is a replacement for PCIe. With much lower latency than PCIe and hardware support for cache coherence, programs can efficiently access remote memory over CXL. These capabilities have opened the possibility of CXL memory pools in datacenter and cloud networks, consist- ing of a large pool of memory that multiple machines shar",
+      "content": "A Case Against CXL Memory Pooling Philip Levis Google plevis@google.com Kun Lin Google linkun@google.com Amy Tai Google amytai@google.com Abstract Compute Express Link (CXL) is a replacement for PCIe. With much lower latency than PCIe and hardware support for cache coherence, programs can efficiently access remote memory over CXL. These capabilities have opened the possibility of CXL memory pools in datacenter and cloud networks, consist- ing of a large pool of memory that multiple machines share. Recent work argues memory pools could reduce memory needs and datacenter costs. In this paper, we argue that three problems preclude CXL memory pools from being useful or promising: cost, complex- ity, and utility. The cost of a CXL pool will outweigh any savings from reducing RAM. CXL has substantially higher latency than main memory, enough so that using it will re- quire substantial rewriting of network applications in complex ways. Finally, from analyzing two production traces from Google and Azure Cloud, we find that modern servers are large relative to most VMs; even simple VM packing algo- rithms strand little memory, undermining the main incentive behind pooling. Despite recent research interest, as long as these three properties hold, CXL memory pools are unlikely to be a useful technology for datacenter or cloud systems. CCS Concepts • Networks → Data center networks ; • Information sys- tems → Enterprise resource planning. Keywords datacenter networking, CXL memory pooling ACM Reference Format: Philip Levis, Kun Lin, and Amy Tai. 2023. A Case Against CXL Memory Pooling. In The 22nd ACM Workshop on Hot Topics in Networks (HotNets ’23), November 28–29, 2023, Cambridge, MA, USA. ACM, New York, NY , USA, 7 pages. https://doi.org/10.1145/ 3626111.3628195 Permission to make digital or hard copies of part or all of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that ",
+      "relevance_score": 0.9,
+      "confidence_score": 0.9,
+      "relationship_type": null,
+      "metadata": {
+        "doc_name": "cxl_03_case_against_cxl_memory_pooling.pdf",
+        "page": 1,
+        "chunk_id": "cxl_03_case_against_cxl_memory_pooling.pdf_1"
+      }
+    },
+    {
+      "title": "system_review_01_compute_near_memory_survey.pdf | p.33",
+      "url": "",
+      "source_type": "rag_pdf",
+      "published_date": null,
+      "company_names": [],
+      "technology_names": [],
+      "stance": "neutral",
+      "snippet": "CNM/CIM Landscape 33 Axelera d-Matrix Synthara Mythic Surecore SEMRON Untether AI Syntiant NeuroBlade Rain AI TetraMem Gyrfalcon Tech UPMEM Neureka EnCharge AI Re(conceive) Applications Inference in datacenters Not available APIs Available Available but requries hardware knowledge SRAM DRAM Memristor (PCM, RRAM) CapRAM Flash Software stack readiness Inference at the edge AI everywhere LLMs at edge (training) Data analytics, general Technology Compute-near-memory (CNM) Compute-in-memory (CIM) Mem",
+      "content": "CNM/CIM Landscape 33 Axelera d-Matrix Synthara Mythic Surecore SEMRON Untether AI Syntiant NeuroBlade Rain AI TetraMem Gyrfalcon Tech UPMEM Neureka EnCharge AI Re(conceive) Applications Inference in datacenters Not available APIs Available Available but requries hardware knowledge SRAM DRAM Memristor (PCM, RRAM) CapRAM Flash Software stack readiness Inference at the edge AI everywhere LLMs at edge (training) Data analytics, general Technology Compute-near-memory (CNM) Compute-in-memory (CIM) Memory technology Samsung MRAM Fig. 27. A landscape of CIM and CNM companies, highlighting their technologies, target applications and software stack readiness. those compatible with manufacturing processes. However, the limitations of these materials to scale further are now exposed. As a result, new materials have emerged and further research is needed to investigate novel materials (to enable further transistor scaling: hopes with carbon nanotube, and novel memory devices). Devices:Mainstream computing has largely relied on digital logic and binary storage. Nonetheless, the emerging wave of computing architectures, particularlyCIMrequires novel multi-state devices allowing both analog and digital operations. Existing devices, memristors in particular, do offer such properties but have reliability and other associated challenges. Integration: We have seen various architectures based on various technologies. As is evident, there is no on-technology-fits-all solution. Eventually,CIMmodules based on different technologies need to be integrated into the same to get the best out of all these technologies. This poses integration challenges that have received little to no attention. Processing systems:These novel architectures require new tools, algorithms, cost models, and software solutions. All of them are crucial to understanding these architectures, enabling their design space exploration, and making them accessible to a larger audience. While every challenge holds significance ",
+      "relevance_score": 0.9,
+      "confidence_score": 0.9,
+      "relationship_type": null,
+      "metadata": {
+        "doc_name": "system_review_01_compute_near_memory_survey.pdf",
+        "page": 33,
+        "chunk_id": "system_review_01_compute_near_memory_survey.pdf_33"
+      }
+    },
+    {
+      "title": "pim_01_modern_primer_on_processing_in_memory.pdf | p.16",
+      "url": "",
+      "source_type": "rag_pdf",
+      "published_date": null,
+      "company_names": [],
+      "technology_names": [],
+      "stance": "neutral",
+      "snippet": "ing limitations, NVMs have yet to approach such scaling limitations. As a result, architects can potentially design NVM memory arrays that integrate PIM functionality from the getgo. A promising direction for this function- ality is the ability to manipulate NVM cells at the circuit level in order to perform logic operations using the mem- ory cells themselves. A number of recent works have demonstrated that NVM cells can be used to perform a complete family of Boolean logic operations [158, 197",
+      "content": "ing limitations, NVMs have yet to approach such scaling limitations. As a result, architects can potentially design NVM memory arrays that integrate PIM functionality from the getgo. A promising direction for this function- ality is the ability to manipulate NVM cells at the circuit level in order to perform logic operations using the mem- ory cells themselves. A number of recent works have demonstrated that NVM cells can be used to perform a complete family of Boolean logic operations [158, 197– 204, 249, 258, 259, 780–788], similar to such operations that can be performed in DRAM cells [ 163, 165–167, 175, 177, 184, 189, 194, 214, 789, 789, 790]. NVMs have also been shown to perform more sophisticated op- erations like matrix-vector multiplication in the analog domain [146, 161, 245, 246, 250–256, 260, 400, 791– 825], which are more difficult to naturally implement in DRAM. 5.2. Two Approaches: Processing-Using-Memory (PUM) vs. Processing-Near-Memory (PNM) Many recent works take advantage of the memory technology innovations that we discuss in Section 5.1 to enable and implement PIM. We find that these works generally take one of two approaches, which are cat- egorized in Table 1: (1) processing-using-memory or (2) processing-near-memory. We briefly describe each approach here. Sections 6 and 7 will provide example approaches and more detail for both. Table 1: Summary of enabling technologies for the two approaches to PIM used by recent works. Adapted from [731] and extended. Approach Example Enabling Technologies Processing-Using-Memory SRAMDRAMNAND flashPhase-change memory (PCM)Magnetic RAM (MRAM)Resistive RAM (RRAM)/memristorsFerroelectric RAM (FeRAM) Processing-Near-Memory Logic layers in 3D-stacked memory(e.g., using hybrid bonding, silicon interposers,or monolithic 3D integration)Logic in memory controllersLogic in memory chips (e.g., near bank, near subarray)Logic in memory modulesLogic in cachesLogic in storage devicesLogic in sensors Processing-using-memo",
+      "relevance_score": 0.9,
+      "confidence_score": 0.9,
+      "relationship_type": null,
+      "metadata": {
+        "doc_name": "pim_01_modern_primer_on_processing_in_memory.pdf",
+        "page": 16,
+        "chunk_id": "pim_01_modern_primer_on_processing_in_memory.pdf_16"
+      }
+    },
+    {
+      "title": "cxl_01_introduction_to_compute_express_link.pdf | p.33",
+      "url": "",
+      "source_type": "rag_pdf",
+      "published_date": null,
+      "company_names": [],
+      "technology_names": [],
+      "stance": "neutral",
+      "snippet": "icantly better resource usage due to increased multiplexing opportunities, and thus lower cost. This design also facilitates accelerating distributed systems via shared memory, message passing, and peer-to-peer communication via CXL. However, a composable system is still distinct from treating all resources connected via CXL as a single big system. Workloads will still prefer locality and spanning as few CXL links as possible to minimize coherence traffic and the blast radius of any failure. 7.2",
+      "content": "icantly better resource usage due to increased multiplexing opportunities, and thus lower cost. This design also facilitates accelerating distributed systems via shared memory, message passing, and peer-to-peer communication via CXL. However, a composable system is still distinct from treating all resources connected via CXL as a single big system. Workloads will still prefer locality and spanning as few CXL links as possible to minimize coherence traffic and the blast radius of any failure. 7.2 Future Directions CXL opens research directions across computer science and engineering. In computer architec- ture, CXL opens a path to prototype and deploy new memory controller features [ 59 ] such as adaptive DRAM refresh to save power and improve performance [ 60 , 61 ], low-cost improvements of reliability [ 62 ], and reducing memory waste [ 63 , 64 ]. External memory controllers can evolve independently from the main CPU and are lower cost, which facilitates faster iteration and cus- tomization. Research may also explore implications for CPU architecture. For example, with higher memory latency and more cache lines in flight, one may expect different prefetching and buffer- sizing strategies as well as increased interest in reducing memory access latencies [ 67 , 68 ]. Another challenge might be impacts from delayed hits, which require more rigorous simulations and mod- eling [ 58 ] as well as different cache management strategies [ 57 ]. In computer systems, CXL memory pooling will spark changes to both local and distributed memory management. For example, we need mechanisms that can prioritize workloads and guar- antee performance in the face of memory pressure from remote hosts. We may also need systems- level approaches to mitigate congestion as well as failures in a distributed memory fabric. For example, QoS in the CXL standard is currently limited to CXL.mem and does not address fabric congestion. Workload scheduling will also need to evolve to support composab",
+      "relevance_score": 0.9,
+      "confidence_score": 0.9,
+      "relationship_type": null,
+      "metadata": {
+        "doc_name": "cxl_01_introduction_to_compute_express_link.pdf",
+        "page": 33,
+        "chunk_id": "cxl_01_introduction_to_compute_express_link.pdf_33"
+      }
+    }
+  ],
+  "validated_facts": [
+    {
+      "claim": "CXL 3.0 enables large-scale resource pooling and sharing across hundreds of machines with a speed of 64 GT/s.",
+      "technology": "CXL",
+      "company": null,
+      "trl_signal": "TRL 4-6",
+      "threat_signal": "Potential challenges in memory pooling due to cost and complexity.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "cxl_01_introduction_to_compute_express_link.pdf_4"
+      ],
+      "evidence_summary": "CXL 3.0 allows for large-scale resource pooling and sharing, addressing challenges in memory bandwidth and capacity expansion.",
+      "source_types": [
+        "rag_pdf"
+      ],
+      "caveat": "Further research is needed to validate the practical implementation of CXL 3.0 in commercial products."
+    },
+    {
+      "claim": "CXL facilitates heterogeneous processing by allowing memory attached to CXL devices to be mapped to system cacheable memory space.",
+      "technology": "CXL",
+      "company": null,
+      "trl_signal": "TRL 4-6",
+      "threat_signal": "Requires CPU and device support for widespread adoption.",
+      "confidence": 0.6,
+      "evidence_ids": [
+        "cxl_01_introduction_to_compute_express_link.pdf_4"
+      ],
+      "evidence_summary": "CXL standardizes a coherent interface that aids in the adoption of PIM systems and programming models.",
+      "source_types": [
+        "rag_pdf"
+      ],
+      "caveat": "Adoption depends on industry-wide support and integration with existing systems."
+    },
+    {
+      "claim": "Processing-in-Memory (PIM) architectures can significantly improve performance and energy efficiency by minimizing data movement.",
+      "technology": "PIM",
+      "company": null,
+      "trl_signal": "TRL 4-6",
+      "threat_signal": "Integration challenges with existing memory technologies.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "pim_01_modern_primer_on_processing_in_memory.pdf_33"
+      ],
+      "evidence_summary": "PIM architectures can execute operations close to memory, reducing data movement and improving system scalability.",
+      "source_types": [
+        "rag_pdf"
+      ],
+      "caveat": "The effectiveness of PIM depends on the specific architecture and application."
+    },
+    {
+      "claim": "CXL memory pooling may face challenges related to cost, complexity, and utility, limiting its effectiveness in datacenter applications.",
+      "technology": "CXL",
+      "company": null,
+      "trl_signal": "TRL 4-6",
+      "threat_signal": "High latency compared to main memory may require significant application rewrites.",
+      "confidence": 0.8,
+      "evidence_ids": [
+        "cxl_03_case_against_cxl_memory_pooling.pdf_1"
+      ],
+      "evidence_summary": "Research indicates that CXL memory pooling may not be a viable solution due to inherent challenges.",
+      "source_types": [
+        "rag_pdf"
+      ],
+      "caveat": "Further empirical studies are needed to assess the real-world applicability of CXL memory pooling."
+    },
+    {
+      "claim": "Processing-Near-Memory (PNM) integrates PIM logic close to or inside memory, enhancing access speed and reducing latency.",
+      "technology": "PIM",
+      "company": null,
+      "trl_signal": "TRL 4-6",
+      "threat_signal": "Reliability challenges associated with new memory technologies.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "pim_01_modern_primer_on_processing_in_memory.pdf_16"
+      ],
+      "evidence_summary": "PNM architectures can execute application portions directly within memory, improving performance.",
+      "source_types": [
+        "rag_pdf"
+      ],
+      "caveat": "The success of PNM depends on the development of reliable memory technologies."
+    }
+  ],
+  "company_profiles": [],
+  "extra": {
+    "query": "HBM4 PIM CXL semiconductor technology review architecture limitation thermal memory pooling near-memory processing TRL survey overview constraints industrial relevance"
+  }
+}

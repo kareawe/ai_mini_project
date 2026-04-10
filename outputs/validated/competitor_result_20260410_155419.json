@@ -1,0 +1,58 @@
+{
+  "agent_name": "CompetitorListupAgent",
+  "status": "partial",
+  "retry_count": 2,
+  "validation_passed": false,
+  "warnings": [
+    "경쟁사/협력사 프로필 수가 부족합니다."
+  ],
+  "raw_items": [],
+  "validated_facts": [],
+  "company_profiles": [
+    {
+      "company_name": "Samsung Electronics",
+      "role": "competitor",
+      "technologies": [
+        "HBM4",
+        "PIM"
+      ],
+      "relationship_type": "candidate_only",
+      "summary": "Samsung is a leading manufacturer of high-bandwidth memory (HBM) and is actively involved in the development of Processing-in-Memory (PIM) technologies.",
+      "supporting_evidence": [
+        "web_1",
+        "web_2"
+      ],
+      "confidence": 0.85,
+      "notes": "Samsung's focus on HBM4 is driven by the increasing demand from AI applications."
+    },
+    {
+      "company_name": "SK Hynix",
+      "role": "competitor",
+      "technologies": [
+        "HBM4"
+      ],
+      "relationship_type": "candidate_only",
+      "summary": "SK Hynix is collaborating with Dell to produce new flash memory chips, which may impact their HBM production capabilities.",
+      "supporting_evidence": [
+        "web_8"
+      ],
+      "confidence": 0.7,
+      "notes": "The collaboration is still in early stages, and its impact on HBM production is uncertain."
+    },
+    {
+      "company_name": "Micron Technology",
+      "role": "competitor",
+      "technologies": [
+        "PIM"
+      ],
+      "relationship_type": "candidate_only",
+      "summary": "Micron is exploring Processing-in-Memory (PIM) architectures to enhance energy efficiency in AI applications.",
+      "supporting_evidence": [
+        "web_34"
+      ],
+      "confidence": 0.65,
+      "notes": "The adoption of PIM is still in research phases, and practical implementations may take time."
+    }
+  ],
+  "extra": {}
+}
