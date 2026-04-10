@@ -46,7 +46,7 @@ Semiconductor Core Technology Strategy Analysis for HBM4, PIM, and CXL
 | LLM        | GPT-4o-mini via OpenAI API       |
 | Vector DB  | ChromaDB                         |
 | Retrieval  | Chroma 기반 검색                 |
-| Embedding  | multilingual-e5-large            |
+| Embedding  |sentence-transformers/paraphrase-multilingual-mpnet-base-v2|
 | Search     | Tavily API                       |
 | Output     | Markdown → PDF                   |
 
