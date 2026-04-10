@@ -1,7 +1,8 @@
 # Semiconductor Strategy Analysis Agent
 
 ## Subject
-Semiconductor Core Technology Strategy Analysis for HBM4, PIM, and CXL
+
+반도체 핵심 기술 전략 분석 (HBM4, PIM, CXL 집중)
 
 ---
 
